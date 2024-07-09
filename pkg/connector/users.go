@@ -39,12 +39,12 @@ func (o *userBuilder) List(
 		zap.String("pToken", pToken.Token),
 	)
 
-	offset, err := parsePageToken(pToken.Token)
+	offset, limit, err := parsePageToken(pToken)
 	if err != nil {
 		logger.Error("invalid page token", zap.Error(err))
 	}
 
-	privXUsers, nextToken, err := o.client.GetUsers(ctx, offset, pToken.Size)
+	privXUsers, nextToken, err := o.client.GetUsers(ctx, offset, limit)
 	if err != nil {
 		logger.Debug(
 			"Error fetching users",

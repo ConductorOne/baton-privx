@@ -20,12 +20,7 @@ type Config struct {
 }
 
 type Connector struct {
-	client            client.PrivXClient
-	baseUrl           string
-	apiClientId       string
-	apiClientSecret   string
-	oAuthClientID     string
-	oAuthClientSecret string
+	client client.PrivXClient
 }
 
 // ResourceSyncers returns a ResourceSyncer for each resource type that should be synced from the upstream service.
@@ -83,13 +78,5 @@ func New(
 		return nil, err
 	}
 
-	privXConnector := &Connector{
-		baseUrl:           config.BaseUrl,
-		apiClientId:       config.ApiClientId,
-		apiClientSecret:   config.ApiClientSecret,
-		oAuthClientID:     config.OAuthClientID,
-		oAuthClientSecret: config.OAuthClientSecret,
-		client:            *privXClient,
-	}
-	return privXConnector, nil
+	return &Connector{client: *privXClient}, nil
 }

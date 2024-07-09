@@ -29,7 +29,7 @@ type roleBuilder struct {
 }
 
 func (o *roleBuilder) ResourceType(ctx context.Context) *v2.ResourceType {
-	return userResourceType
+	return roleResourceType
 }
 
 // List returns all the users from the database as resource objects.
@@ -46,12 +46,12 @@ func (o *roleBuilder) List(
 ) {
 	logger := ctxzap.Extract(ctx)
 
-	offset, err := parsePageToken(pToken.Token)
+	offset, limit, err := parsePageToken(pToken)
 	if err != nil {
 		logger.Error("invalid page token", zap.Error(err))
 	}
 
-	privXRoles, nextToken, err := o.client.GetRoles(ctx, offset, pToken.Size)
+	privXRoles, nextToken, err := o.client.GetRoles(ctx, offset, limit)
 	if err != nil {
 		logger.Debug("Error fetching users", zap.Error(err))
 		return nil, "", nil, err
@@ -100,7 +100,7 @@ func (o *roleBuilder) Grants(
 		zap.String("pToken", pToken.Token),
 	)
 
-	offset, err := parsePageToken(pToken.Token)
+	offset, limit, err := parsePageToken(pToken)
 	if err != nil {
 		logger.Error("invalid page token", zap.Error(err))
 	}
@@ -109,7 +109,7 @@ func (o *roleBuilder) Grants(
 		ctx,
 		resource.Id.Resource,
 		offset,
-		pToken.Size,
+		limit,
 	)
 	if err != nil {
 		return nil, "", nil, err
