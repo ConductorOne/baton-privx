@@ -13,6 +13,8 @@ require (
 	go.uber.org/zap v1.27.0
 )
 
+replace github.com/SSHcom/privx-sdk-go v1.35.0 => ../privx-sdk-go
+
 require (
 	filippo.io/age v1.1.1 // indirect
 	filippo.io/edwards25519 v1.1.0 // indirect
