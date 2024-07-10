@@ -17,11 +17,7 @@ import (
 )
 
 const (
-	// TODO MARCOS 1.0 are these values going to be used?
-	RoleMembershipPermanent  = "permanent"
-	RoleMembershipRestricted = "restricted"
-	RoleMembershipFloating   = "floating"
-	EntitlementAssigned      = "assigned"
+	EntitlementAssigned = "assigned"
 )
 
 type roleBuilder struct {
@@ -71,7 +67,6 @@ func (o *roleBuilder) List(
 	return roleResources, nextToken, nil, nil
 }
 
-// Entitlements always returns an empty slice for users.
 func (o *roleBuilder) Entitlements(
 	_ context.Context,
 	resource *v2.Resource,

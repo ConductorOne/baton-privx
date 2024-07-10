@@ -2,8 +2,6 @@ module github.com/conductorone/baton-privx
 
 go 1.21
 
-toolchain go1.22.4
-
 require (
 	github.com/SSHcom/privx-sdk-go v1.35.0
 	github.com/conductorone/baton-sdk v0.2.2
@@ -13,7 +11,7 @@ require (
 	go.uber.org/zap v1.27.0
 )
 
-replace github.com/SSHcom/privx-sdk-go v1.35.0 => ../privx-sdk-go
+replace github.com/SSHcom/privx-sdk-go v1.35.0 => github.com/conductorone/privx-sdk-go v0.0.1
 
 require (
 	filippo.io/age v1.1.1 // indirect
