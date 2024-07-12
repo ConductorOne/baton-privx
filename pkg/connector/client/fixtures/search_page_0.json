@@ -1,0 +1,66 @@
+{
+  "count": 3,
+  "items": [
+    {
+      "id": "bc0e7972-8f4f-43a0-795a-abfa0ed0309a",
+      "source_user_id": "bc0e7972-8f4f-43a0-795a-abfa0ed0309a",
+      "created": "2024-07-08T17:27:26.178110397Z",
+      "principal": "bc0e7972-8f4f-43a0-795a-abfa0ed0309a",
+      "source": "ff236afd-e4b5-5a14-4bd5-4e61a5463ab0",
+      "source_type": "API-CLIENT",
+      "roles": null,
+      "attributes": [],
+      "permissions": null,
+      "full_name": "Development",
+      "mfa": {
+        "seed": {},
+        "mobile_mfa_status": ""
+      },
+      "RefreshTimestamp": "1720647628"
+    },
+    {
+      "id": "9ceb1de9-e52f-4a6f-521e-3a0dd2d1537b",
+      "source_user_id": "9ceb1de9-e52f-4a6f-521e-3a0dd2d1537b",
+      "created": "2024-07-08T16:58:49.468196Z",
+      "principal": "marcos",
+      "source": "a1ee631f-9698-4a77-8042-2002602f9d08",
+      "source_type": "LOCAL",
+      "roles": null,
+      "attributes": [],
+      "permissions": null,
+      "full_name": "Marcos Gaeta",
+      "department": "test",
+      "email": "marcos@example.com",
+      "distinguished_name": "marcos",
+      "windows_account": "marcos",
+      "unix_account": "marcos",
+      "mfa": {
+        "seed": {},
+        "mobile_mfa_status": ""
+      },
+      "RefreshTimestamp": "1720647628"
+    },
+    {
+      "id": "e2401730-dc81-4f6e-864a-328c3c8e8f6b",
+      "source_user_id": "e2401730-dc81-4f6e-864a-328c3c8e8f6b",
+      "created": "2017-12-15T00:00:00.000000Z",
+      "updated": "2017-12-15T00:00:00.000000Z",
+      "principal": "c1privxadmin",
+      "source": "a1ee631f-9698-4a77-8042-2002602f9d08",
+      "source_type": "LOCAL",
+      "roles": null,
+      "attributes": [],
+      "permissions": null,
+      "full_name": "Super User",
+      "email": "root@localhost",
+      "distinguished_name": "c1privxadmin",
+      "windows_account": "Administrator",
+      "unix_account": "root",
+      "mfa": {
+        "seed": {},
+        "mobile_mfa_status": ""
+      },
+      "RefreshTimestamp": "1720647628"
+    }
+  ]
+}

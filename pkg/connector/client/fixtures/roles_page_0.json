@@ -1,0 +1,153 @@
+{
+  "count": 3,
+  "items": [
+    {
+      "id": "3453395a-2a12-50a5-4fdb-794d567edae0",
+      "created": "2024-07-08T17:03:41.188307Z",
+      "updated": "2024-07-09T21:21:07.31022Z",
+      "author": "c1privxadmin",
+      "updatedby": "c1privxadmin",
+      "name": "Test Role",
+      "permit_agent": true,
+      "source_rules": {
+        "type": "GROUP",
+        "match": "ANY",
+        "rules": []
+      },
+      "permissions": [
+        "vault-manage",
+        "vault-add",
+        "roles-manage",
+        "roles-view",
+        "certificates-view",
+        "logs-manage",
+        "logs-view",
+        "connections-authorize",
+        "connections-manual",
+        "connections-terminate",
+        "connections-trail",
+        "connections-playback",
+        "connections-manage",
+        "connections-view",
+        "workflows-requests-on-behalf",
+        "workflows-requests",
+        "workflows-manage",
+        "workflows-view",
+        "access-groups-manage",
+        "sources-data-push",
+        "sources-manage",
+        "sources-view",
+        "network-targets-manage",
+        "network-targets-view",
+        "hosts-manage",
+        "hosts-view",
+        "users-manage",
+        "users-view",
+        "ueba-manage",
+        "ueba-view",
+        "idp-clients-manage",
+        "idp-clients-view",
+        "webauthn-credentials-manage",
+        "authorized-keys-manage",
+        "licenses-manage",
+        "api-clients-manage",
+        "role-target-resources-manage",
+        "role-target-resources-view",
+        "settings-manage",
+        "settings-view",
+        "requests-view"
+      ],
+      "access_group_id": "9030b77b-3360-4dea-7efc-4cd5c818b49b",
+      "owner_src": "",
+      "context": {
+        "enabled": false,
+        "block_role": true,
+        "validity": [
+          "SUN",
+          "MON",
+          "TUE",
+          "WED",
+          "THU",
+          "FRI",
+          "SAT"
+        ],
+        "start_time": "00:00",
+        "end_time": "00:00",
+        "timezone": "America/Los_Angeles",
+        "ip_masks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "7a32374b-d7c5-4e76-9a16-005f39692f63",
+      "updated": "2017-04-18T14:23:56.381705Z",
+      "author": "Superuser",
+      "name": "privx-admin",
+      "principal_public_key_strings": [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5HY0Og3cenJlP0mM3z1e9zKSSzOXwIwFkjk3+ukHD2ZwnbUzc1TA08uEsF+5UCpnJXyAGX58mbfZb5Gb2HSfZ6cI3D5TfH6dGs2N/v8SrMtR7m8FGTVy4VsjrxuvxmurIeNQM6L+MUgqjJ5wCJS7L2s2J5a5pVLFkQXI9iWvyyAQ1sRRNCiO8gscU1IjRnZ1HoxMQrmKLwUBkrh5ZMiAxqlBoXrzBBeJkprZ5qXzKiM0kGVw97NmVBpDLkJIoO23B+KKfW5b227wkHv1GC9j4V+BNOtP7mD7lEe/6gQeoGo3frG88Kebsr8qB4zeTPn+q38u2oT+9yP6ilOmDYjBHSHn8j/m7krX6g9Zw0SjroUMhP/FChG6sj27XfX8YSLtC1eu4f5+zvGQhiPDb+YAG3fLLtf8RC+eGwkevhagfou648AplSAwg7KV/eqlV+chCSHA1vQabZ5FBlQRNUumqKu6I9SAIbrfHZT+dvjjcEkkBJW+QLlQ8Bsew8yRhYvxJeOGoQj0WXpCgAPESKdqcY1tHnoUoVzT/gmkObETLAFfatmomyDpLwB2OD713byaFcOyLoswClcvtTH6yOcTP/pQlI5XXFZSNaO+Eoas1xvFl8+9CS36LdMsG8Qx8VCkO8wOivoEpac/UoD0LZE/GA3LrrORQPpDeViZvjIGJbw=="
+      ],
+      "source_rules": {
+        "type": "GROUP",
+        "match": "ANY",
+        "rules": [
+          {
+            "type": "RULE",
+            "source": "a1ee631f-9698-4a77-8042-2002602f9d08",
+            "search_string": "(principal=c1privxadmin)",
+            "rules": []
+          }
+        ]
+      },
+      "comment": "PrivX Administrators",
+      "system": true,
+      "permissions": [],
+      "access_group_id": "fcde7572-9781-4d47-bc1d-7977afb11dc3",
+      "owner_src": "",
+      "context": {
+        "enabled": false,
+        "validity": [],
+        "start_time": "",
+        "end_time": "",
+        "timezone": "",
+        "ip_masks": [
+          "0.0.0.0/0"
+        ]
+      }
+    },
+    {
+      "id": "a382cd90-336e-41d2-9432-f28e9afe85c9",
+      "updated": "2017-04-18T14:23:56.381705Z",
+      "author": "Superuser",
+      "name": "privx-user",
+      "principal_public_key_strings": [
+        "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCdohGl0v8uYccaZVZ6jYMKxm1MKgBUIEvnxoy63T3lqINYqTSHhNvvypLCgWas+QztyFY1RH55ueOIj4i9lc+4sO/aFzuupgVDbD1W7AP6dCLSp3PVNSSIcZSANG9mQsCowvVjEYZyuS1wcVLeZ5zbMFC6u5v2ggmbQORxKHzEMJrqlS5D2sJl1JIfCZCZGEU0fxsQEg12iGuUTvLL5Vkaokr2YQZHOhq6XGYBgziyHP7E5JopdRlFXgZb0Af+ImB+aaRUpbN/nGA/t9cLpTZTeDJLMWrElU83cJVaTMgr59ACi6RVsEhPz5YElDee0bIQTqZ+ZmnwJTzm7d8k/80Xlr5TKaG7G7HowRhZHl/qdXQIuZaEAo+OCNPJFpauo1QT5AYETYhiik2eAmjpV6tyDTcv5Ow9/1fWllNghDrtdJPsH1mcgg+HYg0xYIpF1HheiEhM+gXfcvxgIjre/4agKjBdOOrkBhOShQ0ChVjKu63WEOxaCrT8qXiaGYXYVkYTX+Aihhe3s5ll9ei++MVuZU4PDpwj26qc2qlBLG85p9DivvgSdjSQ7RvVh/69QhjdX+Vot2SPXJpr0gcHh1q0eKJTHGwRArGEbi7QufWR+Sott1IZYcvjJiEs+1Qzw0zgmgF2I3bcaVcn8ICtbDAI94Cnac7K2HIrIlhrtSGqyw=="
+      ],
+      "source_rules": {
+        "type": "GROUP",
+        "match": "ANY",
+        "rules": []
+      },
+      "comment": "PrivX Users",
+      "system": true,
+      "permissions": [
+        "authorized-keys-manage",
+        "webauthn-credentials-manage",
+        "workflows-requests",
+        "workflows-requests-on-behalf"
+      ],
+      "access_group_id": "fcde7572-9781-4d47-bc1d-7977afb11dc3",
+      "owner_src": "",
+      "context": {
+        "enabled": false,
+        "validity": [],
+        "start_time": "",
+        "end_time": "",
+        "timezone": "",
+        "ip_masks": [
+          "0.0.0.0/0"
+        ]
+      }
+    }
+  ]
+}

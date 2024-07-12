@@ -2,19 +2,32 @@ package connector
 
 import (
 	"context"
+	"fmt"
 	"io"
 
+	"github.com/conductorone/baton-privx/pkg/connector/client"
 	v2 "github.com/conductorone/baton-sdk/pb/c1/connector/v2"
 	"github.com/conductorone/baton-sdk/pkg/annotations"
 	"github.com/conductorone/baton-sdk/pkg/connectorbuilder"
 )
 
-type Connector struct{}
+type Config struct {
+	BaseUrl           string
+	ApiClientId       string
+	ApiClientSecret   string
+	OAuthClientID     string
+	OAuthClientSecret string
+}
+
+type Connector struct {
+	client client.PrivXClient
+}
 
 // ResourceSyncers returns a ResourceSyncer for each resource type that should be synced from the upstream service.
 func (d *Connector) ResourceSyncers(ctx context.Context) []connectorbuilder.ResourceSyncer {
 	return []connectorbuilder.ResourceSyncer{
-		newUserBuilder(),
+		newUserBuilder(d.client),
+		newRoleBuilder(d.client),
 	}
 }
 
@@ -35,10 +48,35 @@ func (d *Connector) Metadata(ctx context.Context) (*v2.ConnectorMetadata, error)
 // Validate is called to ensure that the connector is properly configured. It should exercise any API credentials
 // to be sure that they are valid.
 func (d *Connector) Validate(ctx context.Context) (annotations.Annotations, error) {
+	err := d.client.Verify(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("privx-connector: failed to validate client credentials: %w", err)
+	}
+
 	return nil, nil
 }
 
 // New returns a new instance of the connector.
-func New(ctx context.Context) (*Connector, error) {
-	return &Connector{}, nil
+func New(
+	ctx context.Context,
+	baseUrl,
+	apiClientId,
+	apiClientSecret,
+	oAuthClientID,
+	oAuthClientSecret string,
+) (*Connector, error) {
+	privXClient, err := client.NewPrivXClient(
+		ctx,
+		baseUrl,
+		apiClientId,
+		apiClientSecret,
+		oAuthClientID,
+		oAuthClientSecret,
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &Connector{client: *privXClient}, nil
 }

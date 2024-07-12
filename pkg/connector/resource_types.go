@@ -10,3 +10,10 @@ var userResourceType = &v2.ResourceType{
 	DisplayName: "User",
 	Traits:      []v2.ResourceType_Trait{v2.ResourceType_TRAIT_USER},
 }
+
+// The role resource type is for all role objects from the database.
+var roleResourceType = &v2.ResourceType{
+	Id:          "role",
+	DisplayName: "Role",
+	Traits:      []v2.ResourceType_Trait{v2.ResourceType_TRAIT_ROLE},
+}
