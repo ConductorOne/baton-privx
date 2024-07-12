@@ -22,6 +22,7 @@ func TestUsersList(t *testing.T) {
 					writer.Header().Set(uhttp.ContentType, "application/json")
 					writer.WriteHeader(http.StatusOK)
 					json, err := os.ReadFile("./client/fixtures/search_page_0.json")
+					require.Nil(t, err)
 					_, err = writer.Write(json)
 					if err != nil {
 						return
@@ -39,13 +40,11 @@ func TestUsersList(t *testing.T) {
 			"oauthClientId",
 			"oauthClientSecret",
 		)
+		require.Nil(t, err)
 		userBuilder := newUserBuilder(*privXClient)
 
 		resources, token, annotations, err := userBuilder.List(ctx, nil, &pagination.Token{})
-
-		if err != nil {
-			println("err", err.Error())
-		}
+		require.Nil(t, err)
 
 		// Assert the returned user has an ID.
 		require.NotNil(t, resources)
@@ -54,7 +53,6 @@ func TestUsersList(t *testing.T) {
 
 		require.Equal(t, "", token)
 		require.Len(t, annotations, 0)
-		require.Nil(t, err)
 	})
 
 	t.Run("should paginate", func(t *testing.T) {
@@ -64,6 +62,7 @@ func TestUsersList(t *testing.T) {
 					writer.Header().Set(uhttp.ContentType, "application/json")
 					writer.WriteHeader(http.StatusOK)
 					json, err := os.ReadFile("./client/fixtures/search_page_0.json")
+					require.Nil(t, err)
 					_, err = writer.Write(json)
 					if err != nil {
 						return
@@ -81,6 +80,7 @@ func TestUsersList(t *testing.T) {
 			"oauthClientId",
 			"oauthClientSecret",
 		)
+		require.Nil(t, err)
 		userBuilder := newUserBuilder(*privXClient)
 
 		paginationToken := pagination.Token{
@@ -89,10 +89,7 @@ func TestUsersList(t *testing.T) {
 		}
 
 		resources, token, annotations, err := userBuilder.List(ctx, nil, &paginationToken)
-
-		if err != nil {
-			println("err", err.Error())
-		}
+		require.Nil(t, err)
 
 		// Assert the returned user has an ID.
 		require.NotNil(t, resources)
@@ -103,6 +100,5 @@ func TestUsersList(t *testing.T) {
 		require.Equal(t, "103", token)
 
 		require.Len(t, annotations, 0)
-		require.Nil(t, err)
 	})
 }
