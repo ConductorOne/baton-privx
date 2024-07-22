@@ -52,4 +52,4 @@ checksum:
 release:
   disable: true
 changelog:
-  skip: true
+  disable: true
