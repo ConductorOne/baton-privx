@@ -11,23 +11,23 @@ import (
 var (
 	baseUrlField = field.StringField(
 		"base-url",
-		field.WithDescription("The hostname (URL) for your PrivX instance. ($BATON_BASE_URL)"),
+		field.WithDescription("The hostname (URL) for your PrivX instance"),
 	)
 	apiClientIdField = field.StringField(
 		"api-client-id",
-		field.WithDescription("The API Client ID (a UUID.) ($BATON_API_CLIENT_ID)"),
+		field.WithDescription("The API Client ID (a UUID.)"),
 	)
 	apiClientSecretField = field.StringField(
 		"api-client-secret",
-		field.WithDescription("The API Client Secret (a base64 string.) ($BATON_API_CLIENT_SECRET)"),
+		field.WithDescription("The API Client Secret (a base64 string.)"),
 	)
 	oauthClientIdField = field.StringField(
 		"oauth-client-id",
-		field.WithDescription("The OAuth Client ID (e.g. \"privx-external\".) ($BATON_OAUTH_CLIENT_ID)"),
+		field.WithDescription("The OAuth Client ID (e.g. \"privx-external\".)"),
 	)
 	oauthClientSecretField = field.StringField(
 		"oauth-client-secret",
-		field.WithDescription("The OAuth Client Secret (a base64 string.) ($BATON_OAUTH_CLIENT_SECRET)"),
+		field.WithDescription("The OAuth Client Secret (a base64 string.)"),
 	)
 )
 
