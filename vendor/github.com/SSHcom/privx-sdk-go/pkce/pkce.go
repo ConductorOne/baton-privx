@@ -55,7 +55,7 @@ func (v CodeVerifier) ChallengeS256() (string, string) {
 	return base64.RawURLEncoding.EncodeToString(digest[:]), MethodS256
 }
 
-// Verify verifies the challenge against the code verifier instance.
+// Verify verifies the challenge against the code verifier intance.
 func (v CodeVerifier) Verify(challenge, method string) bool {
 	if method != MethodS256 {
 		return false

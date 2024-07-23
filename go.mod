@@ -3,15 +3,13 @@ module github.com/conductorone/baton-privx
 go 1.21
 
 require (
-	github.com/SSHcom/privx-sdk-go v1.35.0
-	github.com/conductorone/baton-sdk v0.2.2
+	github.com/SSHcom/privx-sdk-go v1.35.1
+	github.com/conductorone/baton-sdk v0.2.9
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
-	github.com/spf13/viper v1.18.2
+	github.com/spf13/viper v1.19.0
 	github.com/stretchr/testify v1.9.0
 	go.uber.org/zap v1.27.0
 )
-
-replace github.com/SSHcom/privx-sdk-go v1.35.0 => github.com/conductorone/privx-sdk-go v0.0.1
 
 require (
 	filippo.io/age v1.1.1 // indirect
