@@ -40,6 +40,8 @@ var configurationFields = []field.SchemaField{
 	oauthClientSecretField,
 }
 
+var configuration = field.NewConfiguration(configurationFields)
+
 // validateConfig is run after the configuration is loaded, and should return an error if it isn't valid.
 func validateConfig(ctx context.Context, v *viper.Viper) error {
 	if v.GetString(baseUrlField.FieldName) == "" {
