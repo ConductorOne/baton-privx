@@ -23,8 +23,7 @@ func main() {
 		ctx,
 		"baton-privx",
 		getConnector,
-		configurationFields,
-		nil,
+		configuration,
 	)
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err.Error())
