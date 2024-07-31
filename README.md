@@ -30,11 +30,7 @@ docker run --rm -v $(pwd):/out ghcr.io/conductorone/baton:latest -f "/out/sync.c
 go install github.com/conductorone/baton/cmd/baton@main
 go install github.com/conductorone/baton-privx/cmd/baton-privx@main
 
-BATON_API_CLIENT_ID=00000000-0000-0000-0000-000000000000 
-BATON_API_CLIENT_SECRET=Z2ltbWUgY2hlZXNlYnVyZ2Vy
-BATON_BASE_URL=https://privx.example.com/ 
-BATON_OAUTH_CLIENT_ID=privx-external 
-BATON_OAUTH_CLIENT_SECRET=aGV5IHdhc3N1cA
+BATON_API_CLIENT_ID=00000000-0000-0000-0000-000000000000 BATON_API_CLIENT_SECRET=Z2ltbWUgY2hlZXNlYnVyZ2Vy BATON_BASE_URL=https://privx.example.com/ BATON_OAUTH_CLIENT_ID=privx-external BATON_OAUTH_CLIENT_SECRET=aGV5IHdhc3N1cA baton-privx
 
 baton resources
 ```
