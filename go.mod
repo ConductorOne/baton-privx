@@ -1,6 +1,6 @@
 module github.com/conductorone/baton-privx
 
-go 1.21
+go 1.23
 
 require (
 	github.com/SSHcom/privx-sdk-go v1.35.1
