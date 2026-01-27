@@ -8,9 +8,16 @@ else
 OUTPUT_PATH = ${BUILD_DIR}/baton-privx
 endif
 
+# Set the build tag conditionally based on BATON_LAMBDA_SUPPORT
+ifdef BATON_LAMBDA_SUPPORT
+	BUILD_TAGS=-tags baton_lambda_support
+else
+	BUILD_TAGS=
+endif
+
 .PHONY: build
 build:
-	go build -o ${OUTPUT_PATH} ./cmd/baton-privx
+	go build ${BUILD_TAGS} -o ${OUTPUT_PATH} ./cmd/baton-privx
 
 .PHONY: update-deps
 update-deps:
@@ -26,7 +33,3 @@ add-dep:
 .PHONY: lint
 lint:
 	golangci-lint run
-
-.PHONY: test
-test:
-	go test -v ./...
