@@ -1,8 +1,8 @@
 ![Baton Logo](./docs/images/baton-logo.png)
 
-# `baton-privx` [![Go Reference](https://pkg.go.dev/badge/github.com/conductorone/baton-privx.svg)](https://pkg.go.dev/github.com/conductorone/baton-privx) ![main ci](https://github.com/conductorone/baton-privx/actions/workflows/main.yaml/badge.svg)
+# `baton-privx` [![Go Reference](https://pkg.go.dev/badge/github.com/conductorone/baton-privx.svg)](https://pkg.go.dev/github.com/conductorone/baton-privx) ![verify](https://github.com/conductorone/baton-privx/actions/workflows/verify.yaml/badge.svg)
 
-`baton-privx` is a connector for PrivX built using the [Baton SDK](https://github.com/conductorone/baton-sdk). 
+`baton-privx` is a connector for PrivX built using the [Baton SDK](https://github.com/conductorone/baton-sdk).
 It communicates with the privx API to sync data about groups, and users.
 
 Check out [Baton](https://github.com/conductorone/baton) to learn more the project in general.
@@ -43,9 +43,9 @@ baton resources
 
 # Contributing, Support and Issues
 
-We started Baton because we were tired of taking screenshots and manually 
-building spreadsheets. We welcome contributions, and ideas, no matter how 
-small&mdash;our goal is to make identity and permissions sprawl less painful for 
+We started Baton because we were tired of taking screenshots and manually
+building spreadsheets. We welcome contributions, and ideas, no matter how
+small&mdash;our goal is to make identity and permissions sprawl less painful for
 everyone. If you have questions, problems, or ideas: Please open a GitHub Issue!
 
 See [CONTRIBUTING.md](https://github.com/ConductorOne/baton/blob/main/CONTRIBUTING.md) for more details.
