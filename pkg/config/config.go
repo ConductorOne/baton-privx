@@ -18,6 +18,7 @@ var (
 	ApiClientSecretField = field.StringField(
 		"api-client-secret",
 		field.WithRequired(true),
+		field.WithIsSecret(true),
 		field.WithDescription("The API Client Secret (a base64 string.)"),
 	)
 	OauthClientIdField = field.StringField(
@@ -28,6 +29,7 @@ var (
 	OauthClientSecretField = field.StringField(
 		"oauth-client-secret",
 		field.WithRequired(true),
+		field.WithIsSecret(true),
 		field.WithDescription("The OAuth Client Secret (a base64 string.)"),
 	)
 
