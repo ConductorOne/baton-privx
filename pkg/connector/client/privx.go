@@ -34,7 +34,8 @@ func NewPrivXClientWithOAuth(ctx context.Context, baseUrl, oauthClientId, oauthC
 	baseUrl = strings.Trim(baseUrl, "/")
 	authorizer := oauth.With(
 		restapi.New(restapi.BaseURL(baseUrl)),
-		oauth.Digest(oauthClientId, oauthClientSecret),
+		oauth.Access(oauthClientId),
+		oauth.Secret(oauthClientSecret),
 	)
 	return newPrivXClient(baseUrl, authorizer), nil
 }

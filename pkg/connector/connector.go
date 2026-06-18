@@ -13,14 +13,6 @@ import (
 	"github.com/conductorone/baton-sdk/pkg/connectorbuilder"
 )
 
-type Config struct {
-	BaseUrl           string
-	PrivxClientId     string
-	PrivxClientSecret string
-	OAuthClientID     string
-	OAuthClientSecret string
-}
-
 type Connector struct {
 	client client.PrivXClient
 }
