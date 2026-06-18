@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io"
 
+	cfg "github.com/conductorone/baton-privx/pkg/config"
 	"github.com/conductorone/baton-privx/pkg/connector/client"
 	v2 "github.com/conductorone/baton-sdk/pb/c1/connector/v2"
 	"github.com/conductorone/baton-sdk/pkg/annotations"
+	"github.com/conductorone/baton-sdk/pkg/cli"
 	"github.com/conductorone/baton-sdk/pkg/connectorbuilder"
 )
 
@@ -23,9 +25,9 @@ type Connector struct {
 	client client.PrivXClient
 }
 
-// ResourceSyncers returns a ResourceSyncer for each resource type that should be synced from the upstream service.
-func (d *Connector) ResourceSyncers(ctx context.Context) []connectorbuilder.ResourceSyncer {
-	return []connectorbuilder.ResourceSyncer{
+// ResourceSyncers returns a ResourceSyncerV2 for each resource type that should be synced from the upstream service.
+func (d *Connector) ResourceSyncers(ctx context.Context) []connectorbuilder.ResourceSyncerV2 {
+	return []connectorbuilder.ResourceSyncerV2{
 		newUserBuilder(d.client),
 		newRoleBuilder(d.client),
 	}
@@ -40,8 +42,8 @@ func (d *Connector) Asset(ctx context.Context, asset *v2.AssetRef) (string, io.R
 // Metadata returns metadata about the connector.
 func (d *Connector) Metadata(ctx context.Context) (*v2.ConnectorMetadata, error) {
 	return &v2.ConnectorMetadata{
-		DisplayName: "My Baton Connector",
-		Description: "The template implementation of a baton connector",
+		DisplayName: "PrivX",
+		Description: "Baton connector for PrivX",
 	}, nil
 }
 
@@ -79,4 +81,20 @@ func New(
 	}
 
 	return &Connector{client: *privXClient}, nil
+}
+
+// NewLambdaConnector returns a new ConnectorBuilderV2 for use with RunConnector / Lambda.
+func NewLambdaConnector(ctx context.Context, ac *cfg.Privx, _ *cli.ConnectorOpts) (connectorbuilder.ConnectorBuilderV2, []connectorbuilder.Opt, error) {
+	c, err := New(
+		ctx,
+		ac.BaseUrl,
+		ac.ApiClientId,
+		ac.ApiClientSecret,
+		ac.OauthClientId,
+		ac.OauthClientSecret,
+	)
+	if err != nil {
+		return nil, nil, err
+	}
+	return c, nil, nil
 }

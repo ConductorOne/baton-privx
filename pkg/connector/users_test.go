@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/conductorone/baton-privx/pkg/connector/client"
-	"github.com/conductorone/baton-sdk/pkg/pagination"
+	"github.com/conductorone/baton-sdk/pkg/types/resource"
 	"github.com/conductorone/baton-sdk/pkg/uhttp"
 	"github.com/stretchr/testify/require"
 )
@@ -43,7 +43,7 @@ func TestUsersList(t *testing.T) {
 		require.Nil(t, err)
 		userBuilder := newUserBuilder(*privXClient)
 
-		resources, token, annotations, err := userBuilder.List(ctx, nil, &pagination.Token{})
+		resources, results, err := userBuilder.List(ctx, nil, resource.SyncOpAttrs{})
 		require.Nil(t, err)
 
 		// Assert the returned user has an ID.
@@ -51,8 +51,7 @@ func TestUsersList(t *testing.T) {
 		require.Len(t, resources, 3)
 		require.NotEmpty(t, resources[0].Id)
 
-		require.Equal(t, "", token)
-		require.Len(t, annotations, 0)
+		require.Nil(t, results)
 	})
 
 	t.Run("should paginate", func(t *testing.T) {
@@ -83,12 +82,11 @@ func TestUsersList(t *testing.T) {
 		require.Nil(t, err)
 		userBuilder := newUserBuilder(*privXClient)
 
-		paginationToken := pagination.Token{
-			Token: "100",
-			Size:  3,
-		}
+		opts := resource.SyncOpAttrs{}
+		opts.PageToken.Token = "100"
+		opts.PageToken.Size = 3
 
-		resources, token, annotations, err := userBuilder.List(ctx, nil, &paginationToken)
+		resources, results, err := userBuilder.List(ctx, nil, opts)
 		require.Nil(t, err)
 
 		// Assert the returned user has an ID.
@@ -97,8 +95,7 @@ func TestUsersList(t *testing.T) {
 		require.NotEmpty(t, resources[0].Id)
 
 		// Should look for second page.
-		require.Equal(t, "103", token)
-
-		require.Len(t, annotations, 0)
+		require.NotNil(t, results)
+		require.Equal(t, "103", results.NextPageToken)
 	})
 }

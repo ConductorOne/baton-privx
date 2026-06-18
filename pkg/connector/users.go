@@ -6,8 +6,6 @@ import (
 	"github.com/SSHcom/privx-sdk-go/api/rolestore"
 	"github.com/conductorone/baton-privx/pkg/connector/client"
 	v2 "github.com/conductorone/baton-sdk/pb/c1/connector/v2"
-	"github.com/conductorone/baton-sdk/pkg/annotations"
-	"github.com/conductorone/baton-sdk/pkg/pagination"
 	"github.com/conductorone/baton-sdk/pkg/types/resource"
 	"github.com/grpc-ecosystem/go-grpc-middleware/logging/zap/ctxzap"
 	"go.uber.org/zap"
@@ -26,14 +24,14 @@ func (o *userBuilder) ResourceType(ctx context.Context) *v2.ResourceType {
 func (o *userBuilder) List(
 	ctx context.Context,
 	parentResourceID *v2.ResourceId,
-	pToken *pagination.Token,
+	opts resource.SyncOpAttrs,
 ) (
 	[]*v2.Resource,
-	string,
-	annotations.Annotations,
+	*resource.SyncOpResults,
 	error,
 ) {
 	logger := ctxzap.Extract(ctx)
+	pToken := &opts.PageToken
 	logger.Debug(
 		"Starting call to Users.List",
 		zap.String("pToken", pToken.Token),
@@ -50,7 +48,7 @@ func (o *userBuilder) List(
 			"Error fetching users",
 			zap.Error(err),
 		)
-		return nil, "", nil, err
+		return nil, nil, err
 	}
 
 	userResources := make([]*v2.Resource, 0)
@@ -58,31 +56,35 @@ func (o *userBuilder) List(
 		userCopy := user
 		newUserResource, err := userResource(ctx, &userCopy)
 		if err != nil {
-			return nil, "", nil, err
+			return nil, nil, err
 		}
 
 		userResources = append(userResources, newUserResource)
 	}
 
-	return userResources, nextToken, nil, nil
+	if nextToken == "" {
+		return userResources, nil, nil
+	}
+
+	return userResources, &resource.SyncOpResults{NextPageToken: nextToken}, nil
 }
 
 // Entitlements always returns an empty slice for users.
 func (o *userBuilder) Entitlements(
 	_ context.Context,
-	resource *v2.Resource,
-	_ *pagination.Token,
-) ([]*v2.Entitlement, string, annotations.Annotations, error) {
-	return nil, "", nil, nil
+	_ *v2.Resource,
+	_ resource.SyncOpAttrs,
+) ([]*v2.Entitlement, *resource.SyncOpResults, error) {
+	return nil, nil, nil
 }
 
 // Grants always returns an empty slice for users since they don't have any entitlements.
 func (o *userBuilder) Grants(
 	ctx context.Context,
-	resource *v2.Resource,
-	pToken *pagination.Token,
-) ([]*v2.Grant, string, annotations.Annotations, error) {
-	return nil, "", nil, nil
+	_ *v2.Resource,
+	_ resource.SyncOpAttrs,
+) ([]*v2.Grant, *resource.SyncOpResults, error) {
+	return nil, nil, nil
 }
 
 func newUserBuilder(client client.PrivXClient) *userBuilder {
