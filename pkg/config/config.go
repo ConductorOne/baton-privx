@@ -7,6 +7,7 @@ import (
 var (
 	BaseUrlField = field.StringField(
 		"base-url",
+		field.WithRequired(true),
 		field.WithDisplayName("Base URL"),
 		field.WithPlaceholder("Your PrivX base URL"),
 	)

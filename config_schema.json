@@ -94,7 +94,8 @@
     },
     {
       "name": "base-url",
-      "description": "The hostname (URL) for your PrivX instance",
+      "displayName": "Base URL",
+      "placeholder": "Your PrivX base URL",
       "isRequired": true,
       "stringField": {
         "rules": {
@@ -103,46 +104,53 @@
       }
     },
     {
-      "name": "api-client-id",
-      "description": "The API Client ID (a UUID.)",
-      "isRequired": true,
-      "stringField": {
-        "rules": {
-          "isRequired": true
-        }
-      }
+      "name": "privx-client-id",
+      "displayName": "Client ID",
+      "placeholder": "Your PrivX client ID",
+      "stringField": {}
     },
     {
-      "name": "api-client-secret",
-      "description": "The API Client Secret (a base64 string.)",
-      "isRequired": true,
+      "name": "privx-client-secret",
+      "displayName": "Client secret",
+      "placeholder": "Your PrivX client secret",
       "isSecret": true,
-      "stringField": {
-        "rules": {
-          "isRequired": true
-        }
-      }
+      "stringField": {}
     },
     {
       "name": "oauth-client-id",
-      "description": "The OAuth Client ID (e.g. \"privx-external\".)",
-      "isRequired": true,
-      "stringField": {
-        "rules": {
-          "isRequired": true
-        }
-      }
+      "displayName": "OAuth client ID",
+      "placeholder": "Your PrivX OAuth client ID",
+      "stringField": {}
     },
     {
       "name": "oauth-client-secret",
-      "description": "The OAuth Client Secret (a base64 string.)",
-      "isRequired": true,
+      "displayName": "OAuth client secret",
+      "placeholder": "Your PrivX OAuth client secret",
       "isSecret": true,
-      "stringField": {
-        "rules": {
-          "isRequired": true
-        }
-      }
+      "stringField": {}
+    }
+  ],
+  "displayName": "PrivX",
+  "helpUrl": "/docs/baton/privx",
+  "iconUrl": "/static/app-icons/privx.svg",
+  "fieldGroups": [
+    {
+      "name": "privx-group-oauth",
+      "displayName": "OAuth",
+      "fields": [
+        "base-url",
+        "oauth-client-id",
+        "oauth-client-secret"
+      ]
+    },
+    {
+      "name": "privx-group-client-secret",
+      "displayName": "Client secret",
+      "fields": [
+        "base-url",
+        "privx-client-id",
+        "privx-client-secret"
+      ]
     }
   ]
 }
