@@ -15,8 +15,8 @@ import (
 
 type Config struct {
 	BaseUrl           string
-	ClientId          string
-	ClientSecret      string
+	PrivxClientId     string
+	PrivxClientSecret string
 	OAuthClientID     string
 	OAuthClientSecret string
 }
@@ -85,7 +85,7 @@ func NewLambdaConnector(ctx context.Context, ac *cfg.Privx, opts *cli.ConnectorO
 	case "privx-group-oauth":
 		c, err = NewWithOAuth(ctx, ac.BaseUrl, ac.OauthClientId, ac.OauthClientSecret)
 	case "privx-group-client-secret":
-		c, err = NewWithClientSecret(ctx, ac.BaseUrl, ac.ClientId, ac.ClientSecret)
+		c, err = NewWithClientSecret(ctx, ac.BaseUrl, ac.PrivxClientId, ac.PrivxClientSecret)
 	default:
 		return nil, nil, fmt.Errorf("baton-privx: unknown auth method: %s", opts.SelectedAuthMethod)
 	}

@@ -11,12 +11,12 @@ var (
 		field.WithPlaceholder("Your PrivX base URL"),
 	)
 	ClientIdField = field.StringField(
-		"client-id",
+		"privx-client-id",
 		field.WithDisplayName("Client ID"),
 		field.WithPlaceholder("Your PrivX client ID"),
 	)
 	ClientSecretField = field.StringField(
-		"client-secret",
+		"privx-client-secret",
 		field.WithIsSecret(true),
 		field.WithDisplayName("Client secret"),
 		field.WithPlaceholder("Your PrivX client secret"),

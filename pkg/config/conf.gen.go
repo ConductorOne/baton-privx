@@ -5,8 +5,8 @@ import "reflect"
 
 type Privx struct {
 	BaseUrl string `mapstructure:"base-url"`
-	ClientId string `mapstructure:"client-id"`
-	ClientSecret string `mapstructure:"client-secret"`
+	PrivxClientId string `mapstructure:"privx-client-id"`
+	PrivxClientSecret string `mapstructure:"privx-client-secret"`
 	OauthClientId string `mapstructure:"oauth-client-id"`
 	OauthClientSecret string `mapstructure:"oauth-client-secret"`
 }

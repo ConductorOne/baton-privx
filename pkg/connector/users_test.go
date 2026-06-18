@@ -32,13 +32,11 @@ func TestUsersList(t *testing.T) {
 		)
 		defer server.Close()
 
-		privXClient, err := client.NewPrivXClient(
+		privXClient, err := client.NewPrivXClientWithClientSecret(
 			ctx,
 			server.URL,
-			"apiClientId",
-			"apiClientSecret",
-			"oauthClientId",
-			"oauthClientSecret",
+			"clientId",
+			"clientSecret",
 		)
 		require.Nil(t, err)
 		userBuilder := newUserBuilder(*privXClient)
@@ -71,13 +69,11 @@ func TestUsersList(t *testing.T) {
 		)
 		defer server.Close()
 
-		privXClient, err := client.NewPrivXClient(
+		privXClient, err := client.NewPrivXClientWithClientSecret(
 			ctx,
 			server.URL,
-			"apiClientId",
-			"apiClientSecret",
-			"oauthClientId",
-			"oauthClientSecret",
+			"clientId",
+			"clientSecret",
 		)
 		require.Nil(t, err)
 		userBuilder := newUserBuilder(*privXClient)
