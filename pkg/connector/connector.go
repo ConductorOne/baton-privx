@@ -15,8 +15,8 @@ import (
 
 type Config struct {
 	BaseUrl           string
-	ApiClientId       string
-	ApiClientSecret   string
+	ClientId          string
+	ClientSecret      string
 	OAuthClientID     string
 	OAuthClientSecret string
 }
@@ -58,41 +58,37 @@ func (d *Connector) Validate(ctx context.Context) (annotations.Annotations, erro
 	return nil, nil
 }
 
-// New returns a new instance of the connector.
-func New(
-	ctx context.Context,
-	baseUrl,
-	apiClientId,
-	apiClientSecret,
-	oAuthClientID,
-	oAuthClientSecret string,
-) (*Connector, error) {
-	privXClient, err := client.NewPrivXClient(
-		ctx,
-		baseUrl,
-		apiClientId,
-		apiClientSecret,
-		oAuthClientID,
-		oAuthClientSecret,
-	)
-
+// NewWithOAuth returns a new instance of the connector using OAuth authentication.
+func NewWithOAuth(ctx context.Context, baseUrl, oAuthClientID, oAuthClientSecret string) (*Connector, error) {
+	privXClient, err := client.NewPrivXClientWithOAuth(ctx, baseUrl, oAuthClientID, oAuthClientSecret)
 	if err != nil {
 		return nil, err
 	}
+	return &Connector{client: *privXClient}, nil
+}
 
+// NewWithClientSecret returns a new instance of the connector using client secret authentication.
+func NewWithClientSecret(ctx context.Context, baseUrl, clientId, clientSecret string) (*Connector, error) {
+	privXClient, err := client.NewPrivXClientWithClientSecret(ctx, baseUrl, clientId, clientSecret)
+	if err != nil {
+		return nil, err
+	}
 	return &Connector{client: *privXClient}, nil
 }
 
 // NewLambdaConnector returns a new ConnectorBuilderV2 for use with RunConnector / Lambda.
-func NewLambdaConnector(ctx context.Context, ac *cfg.Privx, _ *cli.ConnectorOpts) (connectorbuilder.ConnectorBuilderV2, []connectorbuilder.Opt, error) {
-	c, err := New(
-		ctx,
-		ac.BaseUrl,
-		ac.ApiClientId,
-		ac.ApiClientSecret,
-		ac.OauthClientId,
-		ac.OauthClientSecret,
-	)
+func NewLambdaConnector(ctx context.Context, ac *cfg.Privx, opts *cli.ConnectorOpts) (connectorbuilder.ConnectorBuilderV2, []connectorbuilder.Opt, error) {
+	var c *Connector
+	var err error
+
+	switch opts.SelectedAuthMethod {
+	case "privx-group-oauth":
+		c, err = NewWithOAuth(ctx, ac.BaseUrl, ac.OauthClientId, ac.OauthClientSecret)
+	case "privx-group-client-secret":
+		c, err = NewWithClientSecret(ctx, ac.BaseUrl, ac.ClientId, ac.ClientSecret)
+	default:
+		return nil, nil, fmt.Errorf("baton-privx: unknown auth method: %s", opts.SelectedAuthMethod)
+	}
 	if err != nil {
 		return nil, nil, err
 	}

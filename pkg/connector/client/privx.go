@@ -17,36 +17,36 @@ type PrivXClient struct {
 	RoleStore  rolestore.RoleStore
 }
 
-func NewPrivXClient(
-	ctx context.Context,
-	baseUrl string,
-	apiClientId string,
-	apiClientSecret string,
-	oauthClientId string,
-	oauthClientSecret string,
-) (*PrivXClient, error) {
-	baseUrl = strings.Trim(baseUrl, "/")
-
-	authorizer := oauth.With(
-		restapi.New(
-			restapi.BaseURL(baseUrl),
-		),
-		oauth.Access(apiClientId),
-		oauth.Secret(apiClientSecret),
-		oauth.Digest(oauthClientId, oauthClientSecret),
-	)
-
+func newPrivXClient(baseUrl string, authorizer restapi.Authorizer) *PrivXClient {
 	roleStore := rolestore.New(
 		restapi.New(
 			restapi.Auth(authorizer),
 			restapi.BaseURL(baseUrl),
 		),
 	)
-
 	return &PrivXClient{
 		Authorizer: authorizer,
 		RoleStore:  *roleStore,
-	}, nil
+	}
+}
+
+func NewPrivXClientWithOAuth(ctx context.Context, baseUrl, oauthClientId, oauthClientSecret string) (*PrivXClient, error) {
+	baseUrl = strings.Trim(baseUrl, "/")
+	authorizer := oauth.With(
+		restapi.New(restapi.BaseURL(baseUrl)),
+		oauth.Digest(oauthClientId, oauthClientSecret),
+	)
+	return newPrivXClient(baseUrl, authorizer), nil
+}
+
+func NewPrivXClientWithClientSecret(ctx context.Context, baseUrl, clientId, clientSecret string) (*PrivXClient, error) {
+	baseUrl = strings.Trim(baseUrl, "/")
+	authorizer := oauth.With(
+		restapi.New(restapi.BaseURL(baseUrl)),
+		oauth.Access(clientId),
+		oauth.Secret(clientSecret),
+	)
+	return newPrivXClient(baseUrl, authorizer), nil
 }
 
 func getNextToken(start, found, pageSize int) string {

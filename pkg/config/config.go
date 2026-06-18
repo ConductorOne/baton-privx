@@ -7,44 +7,36 @@ import (
 var (
 	BaseUrlField = field.StringField(
 		"base-url",
-		field.WithRequired(true),
 		field.WithDisplayName("Base URL"),
-		field.WithPlaceholder("https://your-privx-instance.example.com"),
-		field.WithDescription("The hostname (URL) for your PrivX instance"),
+		field.WithPlaceholder("Your PrivX base URL"),
 	)
-	ApiClientIdField = field.StringField(
-		"api-client-id",
-		field.WithRequired(true),
-		field.WithDisplayName("API Client ID"),
-		field.WithPlaceholder("xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"),
-		field.WithDescription("The API Client ID (a UUID.)"),
+	ClientIdField = field.StringField(
+		"client-id",
+		field.WithDisplayName("Client ID"),
+		field.WithPlaceholder("Your PrivX client ID"),
 	)
-	ApiClientSecretField = field.StringField(
-		"api-client-secret",
-		field.WithRequired(true),
+	ClientSecretField = field.StringField(
+		"client-secret",
 		field.WithIsSecret(true),
-		field.WithDisplayName("API Client Secret"),
-		field.WithDescription("The API Client Secret (a base64 string.)"),
+		field.WithDisplayName("Client secret"),
+		field.WithPlaceholder("Your PrivX client secret"),
 	)
 	OauthClientIdField = field.StringField(
 		"oauth-client-id",
-		field.WithRequired(true),
-		field.WithDisplayName("OAuth Client ID"),
-		field.WithPlaceholder("privx-external"),
-		field.WithDescription("The OAuth Client ID (e.g. \"privx-external\".)"),
+		field.WithDisplayName("OAuth client ID"),
+		field.WithPlaceholder("Your PrivX OAuth client ID"),
 	)
 	OauthClientSecretField = field.StringField(
 		"oauth-client-secret",
-		field.WithRequired(true),
 		field.WithIsSecret(true),
-		field.WithDisplayName("OAuth Client Secret"),
-		field.WithDescription("The OAuth Client Secret (a base64 string.)"),
+		field.WithDisplayName("OAuth client secret"),
+		field.WithPlaceholder("Your PrivX OAuth client secret"),
 	)
 
 	ConfigurationFields = []field.SchemaField{
 		BaseUrlField,
-		ApiClientIdField,
-		ApiClientSecretField,
+		ClientIdField,
+		ClientSecretField,
 		OauthClientIdField,
 		OauthClientSecretField,
 	}
@@ -56,4 +48,16 @@ var Config = field.NewConfiguration(
 	field.WithConnectorDisplayName("PrivX"),
 	field.WithIconUrl("/static/app-icons/privx.svg"),
 	field.WithHelpUrl("/docs/baton/privx"),
+	field.WithFieldGroups([]field.SchemaFieldGroup{
+		{
+			Name:        "privx-group-oauth",
+			DisplayName: "OAuth",
+			Fields:      []field.SchemaField{BaseUrlField, OauthClientIdField, OauthClientSecretField},
+		},
+		{
+			Name:        "privx-group-client-secret",
+			DisplayName: "Client secret",
+			Fields:      []field.SchemaField{BaseUrlField, ClientIdField, ClientSecretField},
+		},
+	}),
 )
