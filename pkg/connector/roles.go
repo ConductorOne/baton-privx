@@ -187,11 +187,10 @@ func roleResource(ctx context.Context, role *rolestore.Role) (*v2.Resource, erro
 		role.Name,
 		roleResourceType,
 		role.ID,
-		[]resource.RoleTraitOption{
-			resource.WithRoleProfile(map[string]interface{}{
-				"name": role.Name,
-			}),
-		},
+		[]resource.RoleTraitOption{},
+		resource.WithResourceProfile(map[string]interface{}{
+			"name": role.Name,
+		}),
 	)
 	if err != nil {
 		return nil, err
