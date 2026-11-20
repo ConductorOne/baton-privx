@@ -1,4 +1,4 @@
-![Baton Logo](./docs/images/baton-logo.png)
+![Baton Logo](./baton-logo.png)
 
 # `baton-privx` [![Go Reference](https://pkg.go.dev/badge/github.com/conductorone/baton-privx.svg)](https://pkg.go.dev/github.com/conductorone/baton-privx) ![verify](https://github.com/conductorone/baton-privx/actions/workflows/verify.yaml/badge.svg)
 
